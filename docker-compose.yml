@@ -1,0 +1,38 @@
+version: '3.1'
+
+services:
+  redis:
+    container_name: gf_redis
+    restart: always
+    image: redis:5.0.4-stretch
+    expose:
+      - "6379"
+    volumes:
+      - redis_data:/data
+
+  web:
+    container_name: gf_django
+    restart: always
+    build: .
+    command: bash -c "rm -fr rstatic && python manage.py collectstatic && python manage.py compress && gunicorn app.wsgi:application --bind 0.0.0.0:8000"
+    depends_on:
+      - redis
+    volumes:
+      - .:/code
+    expose:
+      - "8000"
+
+  nginx:
+    container_name: gf_nginx
+    restart: always
+    build: ./docker/nginx
+    volumes:
+      - .:/code
+    ports:
+      - 8000:80
+    depends_on:
+      - web
+
+
+volumes:  
+  redis_data:

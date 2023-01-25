@@ -1,0 +1,52 @@
+{% extends "index.html" %}
+
+{% block title %} Nuestros colaboradores {% endblock %}
+{% block description %}Todos los académitos que han realizado al menos una entrada en este sitio.
+Gracias por tanto.{% endblock %}
+
+{% load static %}
+
+{% block extra_styles %}
+
+{% endblock %}
+
+
+{% block content %}
+<section class="section is-medium container">
+  <h1 class="title"> Nuestra comunidad, quienes han colaborado aquí.</h1>
+  <br>
+  <br>
+  {% for collaborator in profile_list|dictsort:"user.first_name" reversed %}
+  <div class="columns is-10 is-vcentered">
+    <div class="column is-3">
+      <a href="{% url 'collaborators:collaborator' collaborator.user.username %}">
+        {% if collaborator.avatar %}
+        <img
+          style="height: 200px; display: flex; margin: auto;"
+          src="{{ collaborator.avatar.url }}"
+          alt="Avatar de {{collaborator.user.first_name}} {{collaborator.user.last_name}}"
+        >
+        {% else %}
+        <div class="columns is-centered">
+          <i class="fas fa-solid fa-user fa-3x"></i>
+        </div>
+        {% endif %}
+      </a>
+    </div>
+    <div class="column">
+      <h3 class="heading">{{collaborator.occupation}} | {{collaborator.institution}}</h3>
+      <h1 class="title">
+        <a href="{% url 'collaborators:collaborator' collaborator.user.username %}">
+          {{collaborator.user.first_name}} {{collaborator.user.last_name}}
+        </a>
+      </h1>
+      <p>{{collaborator.bio|striptags|truncatechars:"200"}}</p>
+    </div>
+  </div>
+  <hr>
+  {% endfor %}
+</section>
+{% endblock %}
+
+{% block extra_scripts %}
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends "index.html" %}
+
+{% block title %} {{object.user.first_name}} {{object.user.last_name}} {% endblock %}
+{% block description %} {{object.user.bio}} {% endblock %}
+
+{% load static %}
+
+{% block extra_styles %}
+
+{% endblock %}
+
+
+{% block content %}
+<section class="section is-medium container" id="article-main-image">
+  <div class="container column is-10">
+    <article class="columns">
+      <div class="column is-5">
+        {% if collaborator.avatar %}
+        <img
+          style="height: 250px; display: flex; margin: auto;"
+          src="{{object.avatar.url}}"
+          alt="Avatar de {{object.user.first_name}} {{object.user.last_name}}"
+        >
+        {% else %}
+        <div class="columns is-centered">
+          <i class="fas fa-solid fa-user fa-3x"></i>
+        </div>
+        {% endif %}
+      </div>
+      <div class="column is-5">
+        <div>
+          <h3 class="heading">{{object.occupation}} | {{object.institution}}</h3>
+          <h1 class="title">{{object.user.first_name}} {{object.user.last_name}}</h1>
+          <p>{{object.bio}}</p>
+          <br>
+          <a href="mailto:{{object.user.email}}" class="button is-primary">Envíar correo</a>
+        </div>
+      </div>
+    </article>
+  </div>
+  </section>
+
+{% if articles %}
+<hr>
+<section class="section container">
+  <h1 class="title">Más del autor</h1>
+  <div class="columns is-10">
+    {% for article in articles %}
+     {% include 'blog/card.html' with article=article %}
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+{% endblock %}
+
+{% block extra_scripts %}
+{% endblock %}

@@ -1,0 +1,26 @@
+<div class="column is-4">
+  <article class="columns is-multiline">
+    <div class="column is-12">
+      {% if article.main_picture %}
+      <img
+        src="{{article.main_picture.url}}"
+        style="max-height: 152px; margin: auto; display: flex;"
+      >
+      {% else %}
+      <div class="columns is-centered">
+        <i class="fas fa-solid fa-newspaper fa-3x"></i>
+      </div>
+      {% endif %}
+    </div>
+    <div class="column is-12 featured-content ">
+      <h3 class="heading">{{article.publication_type}} | {{article.subject}}</h3>
+      <h1 class="title">{{article.title}}</h1>
+      <p>{{article.short_description}}</p>
+      <br>
+      <a
+        href="{% url 'blog:article' article.publication_type article.slug %}"
+        class="button is-primary"
+      >Ver más</a>
+    </div>
+  </article>
+</div>

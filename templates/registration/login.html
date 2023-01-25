@@ -1,0 +1,64 @@
+{% extends "index.html" %}
+{% load static %}
+
+{% block title %} Iniciar sesión {% endblock %}
+{% block section%} Iniciar sesión {% endblock %}
+
+{% block extra_styles %}
+{% endblock %}
+
+
+{% block content %}
+
+  <section class="hero is-fullheight">
+    <div class="hero-body">
+      <div class="container has-text-centered">
+        {% if 'registro-exitoso' in request.GET %}
+        <p style="color:green">Nuevo usuario creado con éxito, intenta iniciar sesión.</p>
+        {% endif %}
+
+        <div class="column is-4 is-offset-4">
+          <h3 class="title has-text-black">Inicia sesión</h3>
+          <hr class="login-hr">
+          <p class="subtitle has-text-black">Ingresa tus datos para continuar.</p>
+          <div class="box">
+            <figure class="avatar">
+              <img src="{% static '/images/facultad-ingenieria.png' %}">
+            </figure>
+            {% if form.non_field_errors %}
+            <div class="has-text-warning-light">
+              <ul>
+              {% for error in form.non_field_errors %}
+                <li>{{ error }}</li>
+              {% endfor %}
+              </ul>
+            </div>
+            {% endif %}
+            <form method="POST"> {% csrf_token %}
+              <div class="field">
+                <div class="control">
+                  {{form.username}}
+                </div>
+              </div>
+
+              <div class="field">
+                <div class="control">
+                  {{form.password}}
+                </div>
+              </div>
+
+              <button type="submit" class="button is-block is-info is-large is-fullwidth"> Continuar </button>
+            </form>
+          </div>
+          <p class="has-text-grey">
+              <a href="{% url 'sign-up' %}">Registrarse</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+{% endblock %}
+
+{% block extra_scripts %}
+{% endblock %}

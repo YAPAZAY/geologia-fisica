@@ -1,0 +1,11 @@
+*.ini
+*.ipynb
+*.pyc
+*.sqlite
+*.sqlite3
+__pycache__/
+migrations/
+node_modules/
+/media/
+rstatic/
+venv/

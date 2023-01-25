@@ -1,0 +1,18 @@
+{
+	"short_name" : "Metastascience",
+	"name" : "Metastascience",
+	"icons" : [
+		{
+			"src" : "media/logos/logo-metastascience-144x144.png",
+			"sizes" : "144x144",
+			"type" : "img/png",
+			"purpose": "any maskable"
+		}
+	],
+	"start_url" : "./",
+	"background_color": "#ffffff",
+	"theme_color" : "#bebebe",
+	"display" : "standalone",
+	"orientation": "portrait",
+	"lang": "es-MX"
+}

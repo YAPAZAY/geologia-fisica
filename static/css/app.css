@@ -1,0 +1,17 @@
+nav .navbar-brand figure.image img{
+    min-height: 3rem;
+}
+
+.main-content{
+    padding-top: 4rem;
+    min-height: 75vh;
+}
+
+footer.footer{
+    background-color: #0a0a0a;
+    color: #fff;
+}
+
+footer h2{
+    color: #fff
+}

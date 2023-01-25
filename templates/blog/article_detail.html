@@ -1,0 +1,70 @@
+{% extends "index.html" %}
+
+{% block title %} {{object.title}} {% endblock %}
+{% block description %} {{object.short_description}} {% endblock %}
+
+{% load static %}
+
+{% block extra_styles %}
+{% endblock %}
+
+
+{% block content %}
+<section class="section is-medium container" id="article-main-image">
+  <div class="container column is-10">
+    <article class="columns">
+      <div class="column is-5">
+        {% if object.main_picture %}
+        <img
+          style="height: 250px; display: flex; margin: auto;"
+          src="{{object.main_picture.url}}"
+        >
+        {% else %}
+        <div class="columns is-centered">
+          <i class="fas fa-solid fa-newspaper fa-3x"></i>
+        </div>
+        {% endif %}
+      </div>
+      <div class="column is-5">
+        <div>
+          {% if is_author %}
+            <a
+              class="button is-small is-secundary"
+              href="{% url 'blog:update' object.publication_type object.slug%}"
+            >Editar</a> &nbsp; &nbsp; &nbsp; &nbsp;
+            <a
+              class="button is-small is-danger"
+              href="{% url 'blog:delete' object.publication_type object.slug%}"
+            >Borrar</a>
+          <hr>
+          {% endif %}
+          <h3 class="heading">{{object.publication_type}} | {{object.subject}}</h3>
+          <h1 class="title">{{object.title}}</h1>
+          <h1 class="heading"> Por: 
+            <a href="{% url 'collaborators:collaborator' object.author.username %}">
+              {{object.author.first_name}} {{object.author.last_name}}
+            </a>
+          </h1>
+          <p>{{object.short_description}}</p>
+          <br>
+          <a href="{{object.resource_url}}" class="button is-primary">Ir al recurso</a>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+{% if articles %}
+<hr>
+<section class="section container">
+  <h1 class="title">Más del autor</h1>
+  <div class="columns is-10">
+    {% for article in articles %}
+     {% include 'blog/card.html' with article=article %}
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+{% endblock %}
+
+{% block extra_scripts %}
+{% endblock %}

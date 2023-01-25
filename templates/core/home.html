@@ -1,0 +1,57 @@
+{% extends "index.html" %}
+
+{% block title %} Inicio {% endblock %}
+
+{% load static %}
+
+{% block extra_styles %}
+{% endblock %}
+
+
+{% block content %}
+<section class="section is-medium"
+  style="background-image: url('{% static '/images/main-image.jpg' %}');
+  background-repeat: no-repeat; background-size: cover;"
+>
+  <div class="container has-text-centered" style="
+    background-color: rgba(150, 150, 150, 0.5);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 5px;
+    padding: 50px;"
+  >
+    <img src="{% static '/images/facultad-ingenieria.png' %}" width="150" height="40">
+    <h2 class="title" style="color: whitesmoke;">
+      Academia de Geología 
+    <h2 class="subtitle" style="color:whitesmoke;">
+      Espacio para la enseñanza-aprendizaje de la Geología Física
+    </h2>
+  </div>
+</section>
+
+<section class="section">
+  <div class="columns is-centered">
+    <div class="column is-8">
+      <div class="content is-medium">
+        {{site.site_home|safe}} 
+      </div>
+    </div>
+  </div>
+</section>
+
+{% if articles %}
+<hr>
+<section class="section container">
+  <h1 class="title">Últimas entradas</h1>
+  <div class="columns is-10">
+    {% for article in articles %}
+    {% include 'blog/card.html' with article=article %}
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+
+{% endblock %}
+  
+{% block extra_scripts %}
+{% endblock %}

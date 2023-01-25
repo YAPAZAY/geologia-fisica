@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+
+    <head>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+
+        <!-- // Global site tag (gtag.js) - Google Analytics -->
+
+        <title> {{ site.site_name }} | {% block title %}Inicio{% endblock %}</title>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#bebebe">
+        <meta name="description" content="{% block description %} {{site.site_description}} {% endblock %}">
+        <meta name="author" content="{% block author %}Roberto Juárez{% endblock %}">
+
+        {% load static %}
+
+        <link rel="shortcut icon" type="image/png" href="{{site.favicon.url}}"/>
+        <link href="{% static 'css/app.css' %}" rel="stylesheet">
+        {% load compress %}
+        {% compress css inline %}
+          {% block extra_styles %} {% endblock %}
+        {% endcompress %}
+        <!-- Needed CDN scripts -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.2/css/bulma.min.css">
+        <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+        <!-- //Needed CDN scripts -->
+
+        <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+        <!--[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+        <!-- PWA -->
+        <link rel="manifest" href="{% static 'manifest.json' %}">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <meta name="apple-mobile-web-app-title" content="">
+        <link rel="apple-touch-icon" href="{{ site.logo.url }}">
+        <meta name="msapplication-TileImage" content="{{ site.logo.url }}">
+        <meta name="msapplication-TileColor" content="#fff">
+        <!-- // PWA -->
+
+    </head>
+
+    <body>
+      {% include 'base/header.html' %}
+
+      <main class="main-content" id="main" role="main">
+        {% block content %}{% endblock %}
+      </main>
+
+      {% include 'base/footer.html' %}
+    </body>
+
+    {% compress js %}
+      <script src="{% static 'js/app.js' %}"></script>
+      {% block extra_scripts %}{% endblock %}
+    {% endcompress %}
+
+</html>

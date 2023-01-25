@@ -1,0 +1,84 @@
+{% load static %}
+
+<nav class="navbar is-black is-fixed-top">
+  <div class="container">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="{%url 'core:home'%}">
+        <figure class="image">
+          <img src="{% static '/images/division-ciencias-tierra.png' %}">
+        </figure>
+      </a>
+      <span class="navbar-burger burger" data-target="navbarMenu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </span>
+    </div>
+    <div id="navbarMenu" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="/comunidad">
+          Comunidad Académica
+        </a>
+        <a class="navbar-item" href="/blog">
+          Todo
+        </a>
+        <a class="navbar-item" href="/blog/lecturas">
+          Lecturas
+        </a>
+        <a class="navbar-item" href="/blog/videos">
+          Videos
+        </a>
+        <a class="navbar-item" href="/blog/recursos-didacticos">
+          Recursos Didácticos
+        </a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link">
+            Acceso
+          </a>
+          {% if user.is_authenticated %}
+            <div class="navbar-dropdown">
+              <a class="navbar-item" href="{% url 'my-profile' %}">
+                Perfil
+              </a>
+              {% if user.profile.approved %}
+              <a class="navbar-item" href="{% url 'blog:create' %}">
+                Crear recurso
+              </a>
+              {% endif %}
+              <hr class="navbar-divider">
+              <div class="navbar-item">
+                <div class="field is-grouped">
+                  <p class="control">
+                    <a class="button is-small" href="{% url 'logout' %}">
+                      <span class="icon"><i class="fa fa-user-plus"></i></span>
+                      <span>Cerrar sesión</span>
+                    </a>
+                  </p>
+                </div>
+              </div>
+            {% else %}
+              <div class="navbar-dropdown">
+                <div class="navbar-item">
+                  <div class="field is-grouped">
+                    <p class="control">
+                      <a class="button is-small" href="{% url 'sign-up'%}">
+                          <span class="icon"><i class="fa fa-user-plus"></i></span>
+                          <span>Registrarse</span>
+                      </a>
+                    </p>
+                    <p class="control">
+                      <a class="button is-small is-info is-outlined" href="{% url 'login'%}">
+                        <span class="icon">
+                            <i class="fa fa-user"></i>
+                        </span>
+                        <span>Login</span>
+                      </a>
+                    </p>
+              </div>
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>

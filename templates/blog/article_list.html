@@ -1,0 +1,51 @@
+{% extends "index.html" %}
+
+{% block title %} Artículos {% endblock %}
+{% block description %}Un listado de las entradas disponibles.{% endblock %}
+
+{% load static %}
+
+{% block extra_styles %}
+
+{% endblock %}
+
+
+{% block content %}
+<section class="section is-medium container">
+  <h1 class="title"> Listado de recursos disponibles.</h1>
+  <br>
+  <br>
+  {% for article in article_list %}
+  <div class="columns is-10 is-vcentered">
+    <div class="column is-3">
+      <a href="{% url 'blog:article' article.publication_type article.slug %}">
+        {% if article.main_picture %}
+        <img
+          style="height: 200px; display: flex; margin: auto;"
+          src="{{ article.main_picture.url }}"
+        >
+        {% else %}
+        <div class="columns is-centered">
+          <i class="fas fa-solid fa-newspaper fa-3x"></i>
+        </div>
+        {% endif %}
+      </a>
+    </div>
+    <div class="column">
+      <h3 class="heading">{{article.publication_type}} | {{article.subject}}</h3>
+      <h1 class="title"> <a href="{% url 'blog:article' article.publication_type article.slug %}">{{article.title}}</a></h1>
+      <h1 class="heading">Por:
+        <a href="{% url 'collaborators:collaborator' article.author.username %}">
+          {{article.author.first_name}} {{article.author.last_name}}
+        </a>
+      </h1>
+      <p>{{article.short_description}}</p>
+    </div>
+  </div>
+  <hr>
+  {% endfor %}
+</section>
+{% endblock %}
+
+{% block extra_scripts %}
+{% endblock %}
