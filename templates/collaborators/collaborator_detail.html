@@ -15,9 +15,9 @@
   <div class="container column is-10">
     <article class="columns">
       <div class="column is-5">
-        {% if collaborator.avatar %}
+        {% if object.avatar %}
         <img
-          style="height: 250px; display: flex; margin: auto;"
+          style="height: 250px; display: flex; margin: auto; padding: 20px;"
           src="{{object.avatar.url}}"
           alt="Avatar de {{object.user.first_name}} {{object.user.last_name}}"
         >
