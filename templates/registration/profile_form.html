@@ -17,9 +17,12 @@
         <h1 class="title">Mi perfil</h1>
         <form action="" method="post" enctype="multipart/form-data">{% csrf_token %}
           <div class="columns is-vcentered>">
-            {% if form.non_field_errors %}
+            {% if form.errors %}
+              <ul class="list">
               {% for field in form %}
-              <li>{{ field.errors|striptags }}</li>
+                {% for error in field.errors %}
+                <li class="list-item has-text-danger">{{ error|escape }}</li>
+                {% endfor %}
               {% endfor %}
               </ul>
             {% endif %}

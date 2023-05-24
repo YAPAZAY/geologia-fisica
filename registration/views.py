@@ -22,37 +22,37 @@ class SignUpView(WebsiteCommonMixin, CreateView):
         form = super(SignUpView, self).get_form()
         form.fields['username'].widget = forms.TextInput(
             attrs={
-                'class': 'form-control mb-2',
+                'class': 'input is-large',
                 'placeholder': 'Nombre de usuario'
             }
         )
         form.fields['first_name'].widget = forms.TextInput(
             attrs={
-                'class': 'form-control mb-2',
+                'class': 'input is-large',
                 'placeholder': 'Nombre'
             }
         )
         form.fields['last_name'].widget = forms.TextInput(
             attrs={
-                'class': 'form-control mb-2',
+                'class': 'input is-large',
                 'placeholder': 'Apellidos'
             }
         )
         form.fields['email'].widget = forms.EmailInput(
             attrs={
-                'class': 'form-control mb-2',
+                'class': 'input is-large',
                 'placeholder': 'Correo electrónico'
             }
         )
         form.fields['password1'].widget = forms.PasswordInput(
             attrs={
-                'class': 'form-control mb-2',
+                'class': 'input is-large',
                 'placeholder': 'Contraseña'
             }
         )
         form.fields['password2'].widget = forms.PasswordInput(
             attrs={
-                'class': 'form-control mb-2',
+                'class': 'input is-large',
                 'placeholder': 'Confirma tu contraseña'
             }
         )

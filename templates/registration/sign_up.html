@@ -18,52 +18,49 @@
         <hr class="login-hr">
         <p class="subtitle has-text-black">Ingresa tus datos para continuar.</p>
         <div class="box">
+          {% if form.errors %}
+            <ul class="list">
+            {% for field in form %}
+              {% for error in field.errors %}
+              <li class="list-item has-text-danger">{{ error|escape }}</li>
+              {% endfor %}
+            {% endfor %}
+            </ul>
+          {% endif %}
           <form method="POST"> {% csrf_token %}
             <div class="field">
               <div class="control">
-                <input
-                  type="text" name="username" class="input is-large" 
-                  placeholder="Nombre de usuario" required="" id="id_username"
-                >
+                {{form.username}}
               </div>
             </div>
 
             <div class="field">
               <div class="control">
-                <input
-                  type="text" name="first_name" class="input is-large"
-                  placeholder="Nombre" id="id_first_name"
-                >
+                {{form.first_name}}
               </div>
             </div>
 
             <div class="field">
               <div class="control">
-                <input
-                  type="text" name="last_name" class="input is-large"
-                  placeholder="Apellidos" id="id_last_name"
-                >
+                {{form.last_name}}
               </div>
             </div>
 
             <div class="field">
               <div class="control">
-                <input
-                    type="email" name="email" class="input is-large"
-                    placeholder="Correo electrónico" required="" id="id_email"
-                >
+                {{form.email}}
               </div>
             </div>
 
             <div class="field">
               <div class="control">
-                <input type="password" name="password1" class="input is-large" placeholder="Contraseña" required="" id="id_password1">
+                {{form.password1}}
               </div>
             </div>
 
             <div class="field">
               <div class="control">
-                <input type="password" name="password2" class="input is-large" placeholder="Confirma tu contraseña" required="" id="id_password2">
+                {{form.password2}}
               </div>
             </div>
 
