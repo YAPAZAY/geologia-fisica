@@ -1,0 +1,29 @@
+{% extends "index.html" %}
+
+{% block title %} {{object.title}} {% endblock %}
+{% block description %} {{object.short_description}} {% endblock %}
+
+{% load static %}
+
+{% block extra_styles %}
+{% endblock %}
+
+
+
+{% block content %}
+<section class="hero is-fullheight" style="min-height: 75vh;">
+  <div class="hero-body">
+    <div class="container">
+      <div class="column is-10 is-offset" style="margin: auto;">
+        <h1 class="title">Eliminar entrada</h1>
+        <form method="post">{% csrf_token %}
+          <p>¿Estás seguro que quieres eliminar "{{ object }}"?</p>
+          {{ form }}
+          <br>
+          <input type="submit" value="Estoy seguro" class="button is-danger">
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

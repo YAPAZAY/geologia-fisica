@@ -98,4 +98,4 @@ class ArticleUpdate(WebsiteCommonMixin, UpdateView):
 @method_decorator(is_author, name='dispatch')
 class ArticleDelete(WebsiteCommonMixin, DeleteView):
     model = Article
-    success_url = reverse_lazy('blog:article')
+    success_url = reverse_lazy('blog:articles')
