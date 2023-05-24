@@ -88,7 +88,6 @@ class ArticleUpdate(WebsiteCommonMixin, UpdateView):
     template_name = 'blog/article_form.html'
 
     def get_success_url(self):
-        print('en la vista')
         return reverse_lazy('blog:update', args=[
             self.object.publication_type, self.object.slug
         ]) + '?ok'

@@ -22,7 +22,8 @@ class ArticleForm(forms.ModelForm):
             'slug': forms.TextInput(
                 attrs={
                     'class': 'input',
-                    'placeholder': 'Ej. cuestionario-meteorizacion'
+                    'readonly': True,
+                    'placeholder': 'generado-automaticamente'
                 }
             ),
             'short_description': forms.Textarea(

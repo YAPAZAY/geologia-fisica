@@ -17,7 +17,7 @@
         <ul class="list">
         {% for field in form %}
           {% for error in field.errors %}
-          <li class="list-item has-text-danger">{{ error|escape }}</li>
+          <li class="list-item has-text-danger">{{ field.name|title }}: {{ error|escape }}</li>
           {% endfor %}
         {% endfor %}
         </ul>
@@ -29,7 +29,7 @@
               {{form.title}}
             </div>
           </div>
-          <div class="field">
+          <div class="field" style="display: none;">
             <label class="label">Slug</label>
             <div class="control">
               {{form.slug}}
@@ -96,4 +96,27 @@
     </div>
   </div>
 </section>
+
+<script>
+  let sluglify = function(str) {
+    str = str.replace(/^\s+|\s+$/g, '');
+    str = str.toLowerCase();
+    var from = "ãàáäâẽèéëêìíïîõòóöôùúüûñç·/_,:;";
+    var to   = "aaaaaeeeeeiiiiooooouuuunc------";
+    for (var i = 0, l = from.length; i < l; i++) {
+      str = str.replace(new RegExp(from.charAt(i), 'g'), to.charAt(i));
+    }
+
+    str = str.replace(/[^a-z0-9 -]/g, '')
+      .replace(/\s+/g, '-')
+      .replace(/-+/g, '-');
+    return str;
+  };
+
+  document.getElementById("id_title").onchange = function(){
+    document.getElementById("id_slug").setAttribute(
+      'value', sluglify(document.getElementById("id_title").value)
+    );
+  };
+</script>
 {% endblock %}
