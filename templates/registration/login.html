@@ -25,14 +25,17 @@
             <figure class="avatar">
               <img src="{% static '/images/facultad-ingenieria.png' %}">
             </figure>
-            {% if form.non_field_errors %}
-            <div class="has-text-warning-light">
-              <ul>
+            {% if form.errors %}
+              <ul class="list">
+              {% for field in form %}
+                {% for error in field.errors %}
+                <li class="list-item has-text-danger">{{ field.name|title }}: {{ error|escape }}</li>
+                {% endfor %}
+              {% endfor %}
               {% for error in form.non_field_errors %}
-                <li>{{ error }}</li>
+                <li class="list-item has-text-danger">{{ error|escape }}</li>
               {% endfor %}
               </ul>
-            </div>
             {% endif %}
             <form method="POST"> {% csrf_token %}
               <div class="field">

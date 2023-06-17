@@ -19,14 +19,17 @@
         <p class="subtitle has-text-black">Ingresa tus datos para continuar.</p>
         <div class="box">
           {% if form.errors %}
-            <ul class="list">
-            {% for field in form %}
-              {% for error in field.errors %}
-              <li class="list-item has-text-danger">{{ error|escape }}</li>
-              {% endfor %}
+          <ul class="list">
+          {% for field in form %}
+            {% for error in field.errors %}
+            <li class="list-item has-text-danger">{{ field.name|title }}: {{ error|escape }}</li>
             {% endfor %}
-            </ul>
-          {% endif %}
+          {% endfor %}
+          {% for error in form.non_field_errors %}
+            <li class="list-item has-text-danger">{{ error|escape }}</li>
+          {% endfor %}
+          </ul>
+        {% endif %}
           <form method="POST"> {% csrf_token %}
             <div class="field">
               <div class="control">
