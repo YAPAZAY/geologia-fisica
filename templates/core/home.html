@@ -9,17 +9,14 @@
 
 
 {% block content %}
-<section class="section is-medium"
-  style="background-image: url('{% static '/images/main-image.jpg' %}');
-  background-repeat: no-repeat; background-size: cover;"
+<section class="section is-medium cover-image"
+  {% if site.cover_image %}
+    style="background-image: url('{{ site.cover_image.url }}');"
+  {% else %}
+    style="background-image: url('{% static '/images/main-image.jpg' %}');"
+  {% endif %}
 >
-  <div class="container has-text-centered" style="
-    background-color: rgba(150, 150, 150, 0.5);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border-radius: 5px;
-    padding: 50px;"
-  >
+  <div class="container has-text-centered cover-container">
     <img src="{% static '/images/facultad-ingenieria.png' %}" width="150" height="40">
     <h2 class="title" style="color: whitesmoke;">
       Academia de Geología 
@@ -33,7 +30,7 @@
   <div class="columns is-centered">
     <div class="column is-8">
       <div class="content is-medium">
-        {{site.site_home|safe}} 
+        {{site.site_home|safe}}
       </div>
     </div>
   </div>

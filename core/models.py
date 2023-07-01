@@ -4,10 +4,39 @@ from django.db import models
 
 
 class SiteData(models.Model):
+
+    def custom_uplad_to(instance, filename):
+        try:
+            if SiteData.objects:
+                old_instance = SiteData.objects.get(
+                    site_name=instance.site_name)
+                old_instance.cover_image.delete()
+        except ObjectDoesNotExist:
+            pass
+        return 'site/cover_image/' + filename
+
+    def favicon_custom_uplad_to(instance, filename):
+        try:
+            if SiteData.objects:
+                old_instance = SiteData.objects.get(
+                    site_name=instance.site_name)
+                old_instance.favicon.delete()
+        except ObjectDoesNotExist:
+            pass
+        return 'site/favicon/' + filename
+
     site_name = models.CharField(
         verbose_name="Nombre del sitio", max_length=50, null=False)
     site_description = models.CharField(
         verbose_name="Descripción del sitio", max_length=500, null=False)
+    cover_image = models.ImageField(
+        upload_to=custom_uplad_to, verbose_name="Foto de portada del sitio",
+        null=True, blank=True
+    )
+    favicon = models.ImageField(
+        upload_to=favicon_custom_uplad_to, verbose_name="favicon del sitio",
+        null=True, blank=True
+    )
     site_home = RichTextField(
         verbose_name="Texto de bienvenida", null=True, blank=True)
     google_tag = models.CharField(
@@ -29,7 +58,7 @@ class SiteData(models.Model):
 class ContentManagmentSystem(models.Model):
     def custom_uplad_to(instance, filename):
         try:
-            if ContentManagmentSystem.objects.get(slug=instance.slug):
+            if ContentManagmentSystem.objects:
                 old_instance = ContentManagmentSystem.objects.get(
                     slug=instance.slug)
                 old_instance.avatar.delete()
