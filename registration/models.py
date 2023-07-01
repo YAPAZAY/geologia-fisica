@@ -1,4 +1,5 @@
 from django.contrib.auth.models import User
+from django.core.exceptions import ObjectDoesNotExist
 from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
@@ -7,9 +8,12 @@ from django.dispatch import receiver
 class Profile(models.Model):
 
     def custom_uplad_to(instance, filename):
-        if Profile.objects:
-            old_instance = Profile.objects.get(pk=instance.pk)
-            old_instance.avatar.delete()
+        try:
+            if Profile.objects:
+                old_instance = Profile.objects.get(pk=instance.pk)
+                old_instance.avatar.delete()
+        except ObjectDoesNotExist:
+            pass
         return 'profiles/' + filename
 
     user = models.OneToOneField(User, on_delete=models.CASCADE)

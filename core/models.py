@@ -1,4 +1,5 @@
 from ckeditor.fields import RichTextField
+from django.core.exceptions import ObjectDoesNotExist
 from django.db import models
 
 
@@ -27,10 +28,13 @@ class SiteData(models.Model):
 
 class ContentManagmentSystem(models.Model):
     def custom_uplad_to(instance, filename):
-        if ContentManagmentSystem.objects.get(slug=instance.slug):
-            old_instance = ContentManagmentSystem.objects.get(
-                slug=instance.slug)
-            old_instance.avatar.delete()
+        try:
+            if ContentManagmentSystem.objects.get(slug=instance.slug):
+                old_instance = ContentManagmentSystem.objects.get(
+                    slug=instance.slug)
+                old_instance.avatar.delete()
+        except ObjectDoesNotExist:
+            pass
         return 'site/cms/' + filename
 
     slug = models.SlugField(max_length=250, primary_key=True)
